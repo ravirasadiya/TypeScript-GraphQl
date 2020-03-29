@@ -22,5 +22,5 @@ En este un ejemplo práctico de Nodejs y GraphQL Utilizando conexión a base de 
 - "typescript": "^3.8.3"
 
 
-![Typescript & GraphQL | TypeORM, Type-GraphQL y ApolloServer]
-(https://raw.githubusercontent.com/parzibyte/WaterPy/master/assets/ImagenV1.png)
+## Typescript & GraphQL | TypeORM, Type-GraphQL y ApolloServer
+(https://github.com/JuanKno/Typescript-GraphQL/blob/master/src/img/GraphQl.png)
