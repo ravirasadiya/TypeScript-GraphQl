@@ -4,8 +4,6 @@ En este un ejemplo práctico de Nodejs y GraphQL Utilizando conexión a base de 
 
 ## Dependencias
 
-##
-
 - "apollo-server-express": "^2.11.0"
 - "express": "^4.17.1"
 - "mysql": "^2.18.1"
