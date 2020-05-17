@@ -1,0 +1,45 @@
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  Timestamp,
+  CreateDateColumn,
+  BaseEntity,
+} from "typeorm";
+import { Field, Int, ObjectType, ID } from "type-graphql";
+
+@ObjectType()
+@Entity()
+export class Category extends BaseEntity {
+  @Field()
+  @PrimaryGeneratedColumn()
+  id?: number;
+
+  @Field()
+  @Column()
+  name!: string;
+
+  @Field()
+  @Column()
+  type!: string;
+
+  @Field()
+  @Column()
+  icon!: string;
+
+  @Field()
+  @Column({ nullable: true })
+  slug!: string;
+
+  @Field()
+  @Column({ default: 0, comment: 'hello wordl' })
+  number_of_product!: number;
+
+  @Field()
+  @Column()
+  parentId!: string;
+
+  @Field()
+  @CreateDateColumn({ type: "timestamp" })
+  creation_date!: string;
+}

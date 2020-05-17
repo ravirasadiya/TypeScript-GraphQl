@@ -1,45 +1,47 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-  Arg,
-  Field,
-  InputType,
-  Int,
-  ID,
-} from "type-graphql";
-import { Category } from "../entity/Category";
-
-@InputType({ description: "New Category Data" })
-class AddCategoryInput implements Partial<Category> {
-
-  @Field()
-  name!: string;
-
-  @Field({ defaultValue: null })
-  type!: string;
-
-  @Field({ nullable: true })
-  icon!: string;
-
-  @Field({ nullable: true })
-  slug!: string;
+import { Resolver, Query, Mutation, Arg, Field, InputType, Int, ID, registerEnumType } from 'type-graphql'
+import { Category } from '../entity/Category';
+import { TaskStateEnum } from "../entity/const";
 
 
-  @Field({ nullable: true })
-  parentId!: string;
+@InputType()
+class CategoryCreateInput {
+
+    @Field({ nullable: true })
+    parent_id?: number;
+
+    @Field()
+    name!: string;
+
+    @Field({ nullable: true })
+    slug?: string;
+
+    @Field({ nullable: true })
+    description?: string;
+
+    @Field({ nullable: true })
+    picture?: string;
+
+    @Field({ nullable: true })
+    icon_class?: string;
+
+    @Field()
+    type?: TaskStateEnum;
+
+    @Field({ nullable: true })
+    active?: number;
 }
 
 @Resolver()
 export class CategoryResolver {
 
+    @Mutation(() => Category)
+    async  createCategory(
+        @Arg("variables", type => CategoryCreateInput) variables: CategoryCreateInput
+    ) {
 
-  @Mutation(() => Category, { description: "Create Category" })
-  async createCategory(
-    @Arg("category") category: AddCategoryInput
-  ): Promise<Category> {
-    const newCategory = Category.create(category);
-    return await newCategory.save();
-  }
+        const newCategory = Category.create(variables)
+        return await newCategory.save();
+    }
+
 
 }

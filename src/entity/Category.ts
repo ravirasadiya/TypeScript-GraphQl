@@ -1,45 +1,70 @@
 import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  Timestamp,
-  CreateDateColumn,
-  BaseEntity,
+    Entity,
+    Column,
+    PrimaryGeneratedColumn,
+    CreateDateColumn,
+    BaseEntity,
 } from "typeorm";
 import { Field, Int, ObjectType, ID } from "type-graphql";
+import { TaskStateEnum } from "./const";
 
 @ObjectType()
 @Entity()
 export class Category extends BaseEntity {
-  @Field()
-  @PrimaryGeneratedColumn()
-  id!: string;
+    @Field()
+    @PrimaryGeneratedColumn()
+    id?: number;
 
-  @Field(() => String)
-  @Column()
-  name!: string;
+    @Field()
+    @Column({ nullable: true })
+    translation_lang?: string;
 
-  @Field(() => String)
-  @Column()
-  type!: string;
+    @Field()
+    @Column({ nullable: true })
+    translation_of?: number;
 
-  @Field(() => String)
-  @Column()
-  icon!: string;
+    @Field()
+    @Column({ nullable: true, default: 0 })
+    parent_id?: number;
 
-  @Field(() => String)
-  @Column()
-  slug!: string;
+    @Field()
+    @Column({ default: '' })
+    name!: string;
 
-  @Field(() => Int)
-  @Column("int", { default: 0 })
-  number_of_product!: number;
+    @Field()
+    @Column({ nullable: true })
+    slug?: string;
 
-  @Field(() => String)
-  @Column()
-  parentId!: string;
+    @Field()
+    @Column({ nullable: true })
+    description?: string;
 
-  @Field(() => String)
-  @CreateDateColumn({ type: "timestamp" })
-  creation_date!: string;
+    @Field()
+    @Column({ nullable: true })
+    picture?: string;
+
+    @Field()
+    @Column({ nullable: true })
+    icon_class?: string;
+
+    @Field()
+    @Column({ nullable: true })
+    lft?: number;
+
+    @Field()
+    @Column({ nullable: true })
+    rgt?: number;
+
+    @Field()
+    @Column({ nullable: true })
+    depth?: number;
+
+    @Field()
+    @Column({ type: "enum", enum: TaskStateEnum, nullable: true, comment: 'Only select this for parent categories', default: TaskStateEnum.Classified })
+    type?: TaskStateEnum;
+
+    @Field()
+    @Column({ type: 'tinyint', nullable: true, default: 1 })
+    active?: number;
+
 }
